@@ -445,3 +445,4 @@ fabric.properties
 
 # data directory
 data/
+sql_server_logs/
