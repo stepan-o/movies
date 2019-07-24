@@ -13,7 +13,6 @@ __pycache__/
 build/
 develop-eggs/
 dist/
-downloads/
 eggs/
 .eggs/
 lib/
@@ -54,7 +53,6 @@ coverage.xml
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 
@@ -120,11 +118,9 @@ venv.bak/
 .nfs*
 ### TeX template
 ## Core latex/pdflatex auxiliary files:
-*.aux
 *.lof
 *.lot
 *.fls
-*.out
 *.toc
 *.fmt
 *.fot
@@ -145,9 +141,7 @@ venv.bak/
 .pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
-*.bbl
 *.bcf
-*.blg
 *-blx.aux
 *-blx.bib
 *.run.xml
@@ -156,7 +150,6 @@ venv.bak/
 *.fdb_latexmk
 *.synctex
 *.synctex(busy)
-*.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
 
@@ -450,3 +443,5 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+# data directory
+data/
