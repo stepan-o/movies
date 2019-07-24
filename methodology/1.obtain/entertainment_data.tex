@@ -1,0 +1,198 @@
+%! Author = Stepan Oskin
+%! Date = 2019-07-19
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+linkcolor=blue,
+filecolor=magenta,
+urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+% Document
+\begin{document}
+
+    \title{Movies dataset \\
+    OSEMN methodology, Step 1: \\
+    Obtaining movies data from various sources}
+
+    \author{Stepan Oskin}
+
+    \maketitle
+
+    \begin{abstract}
+        This document describes the process of obtaining movies data from various sources.
+    \end{abstract}
+
+    \section{Data on Entertainment} \label{sec:ent_data}
+
+    La Fabbrica della Realta, an Entertainment Marketing Consulting agency, provides a good overview of available data sources for entertainment industry:
+
+    \url{https://www.lafabbricadellarealta.com/open-data-entertainment/}
+
+    \vspace{5mm}
+
+    Of the data that allows the movie and TV industries to function, very little is open.
+    From the list of sources that feature more than 1'000 items provided by La Fabbrica della Realta, some sources have a proper open data license, while most of them don't.
+
+    Below is the description of some of the sources listed by La Fabbrica della Realta which have been chosen for the purposes of this analysis.
+
+    \section{IMDb Datasets} \label{sec:imdb}
+
+    IMDb datasets provide a trove of troves of entertainment data that are refreshed daily and available for \textbf{personal and non-commercial use}.
+    You are allowed to hold local copies of this data, and it is subject to IMBb terms and conditions.
+
+    \newpage
+
+    \subsection{IMDb Licence} \label{subsec:imbd_licence}
+
+    Compliance can be verified by referring to:
+    \begin{itemize}
+
+        \item Non-Commercial Licensing
+
+        \url{https://help.imdb.com/article/imdb/general-information/can-i-use-imdb-data-in-my-software/G5JTRESSHJBBHTGX?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=3aefe545-f8d3-4562-976a-e5eb47d1bb18&pf_rd_r=MBQYD9CR3MEXPZJ2PSQS&pf_rd_s=center-1&pf_rd_t=60601&pf_rd_i=interfaces&ref_=fea_mn_lk1}
+
+        \item copyright/licence
+
+        \url{http://www.imdb.com/Copyright?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=3aefe545-f8d3-4562-976a-e5eb47d1bb18&pf_rd_r=MBQYD9CR3MEXPZJ2PSQS&pf_rd_s=center-1&pf_rd_t=60601&pf_rd_i=interfaces&ref_=fea_mn_lk2}
+
+    \end{itemize}
+
+    \subsection{IMDb Data Location} \label{subsec:imdb_data_loc}
+
+    The dataset files can be accessed and downloaded from:
+
+    \url{https://datasets.imdbws.com/}
+
+    The data is refreshed daily.
+
+    \subsection{IMDb Dataset Details} \label{subsec:imdb_data_desc}
+
+    Each dataset is contained in a gzipped, tab-separated-values (TSV) formatted file in the UTF-8 character set.
+    The first line in each file contains headers that describe what is in each column.
+    A \texttt{\textbackslash N} is used to denote that a particular field is missing or null for that title/name.
+
+    \vspace{5mm}
+    The available datasets are as follows:
+    \vspace{5mm}
+
+    \textbf{title.akas.tsv.gz} - Contains the following information for titles:
+
+    \begin{itemize}
+        \item \texttt{titleId} (string)\textemdash a tconst, an alphanumeric unique identifier of the title
+        \item \texttt{ordering} (integer)\textemdash a number to uniquely identify rows for a given \texttt{titleId}
+        \item \texttt{title} (string)\textemdash the localized title
+        \item \texttt{region} (string)\textemdash the region for this version of the title
+        \item \texttt{language} (string)\textemdash the language of the title
+        \item \texttt{types} (array)\textemdash Enumerated set of attributes for this alternative title.
+        One or more of the following: "alternative", "dvd", "festival", "tv", "video", "working", "original", "imdbDisplay".
+        New values may be added in the future without warning
+        \item \texttt{attributes} (array)\textemdash Additional terms to describe this alternative title, not enumerated
+        \item \texttt{isOriginalTitle} (boolean)\textemdash 0: not original title;
+        1: original title
+    \end{itemize}
+
+    \textbf{title.basics.tsv.gz}\textemdash Contains the following information for titles:
+
+    \begin{itemize}
+        \item \texttt{tconst} (string)\textemdash alphanumeric unique identifier of the title
+        \item \texttt{titleType} (string)\textemdash the type/format of the title (\textit{e.g.,} movie, short, tvseries, tvepisode, video, \textit{etc.})
+        \item \texttt{primaryTitle} (string)\textemdash the more popular title / the title used by the filmmakers on promotional materials at the point of release
+        \item \texttt{originalTitle} (string)\textemdash original title, in the original language
+        \item \texttt{isAdult} (boolean)\textemdash 0: non-adult title;
+        1: adult title
+        \item \texttt{startYear} (YYYY)\textemdash represents the release year of a title.
+        In the case of TV Series, it is the series start year
+        \item \texttt{endYear} (YYYY)\textemdash TV Series end year.
+        \texttt{\textbackslash N} for all other title types
+        \item \texttt{runtimeMinutes}\textemdash primary runtime of the title, in minutes
+        \item \texttt{genres} (string array)\textemdash includes up to three genres associated with the title
+    \end{itemize}
+
+    \textbf{title.crew.tsv.gz}\textemdash Contains the director and writer information for all the titles in IMDb. Fields include:
+
+    \begin{itemize}
+        \item \texttt{tconst} (string)\textemdash alphanumeric unique identifier of the title
+        \item \texttt{directors} (array of nconsts)\textemdash director(s) of the given title
+        \item \texttt{writers} (array of nconsts)\textemdash writer(s) of the given title
+    \end{itemize}
+
+    \newpage
+
+    \textbf{title.episode.tsv.gz}\textemdash Contains the tv episode information.
+    Fields include:
+
+    \begin{itemize}
+        \item \texttt{tconst} (string)\textemdash alphanumeric identifier of episode
+        \item \texttt{parentTconst} (string)\textemdash alphanumeric identifier of the parent TV Series
+        \item \texttt{seasonNumber} (integer)\textemdash season number the episode belongs to
+        \item \texttt{episodeNumber} (integer)\textemdash episode number of the \texttt{tconst} in the TV series
+    \end{itemize}
+
+    \textbf{title.principals.tsv.gz}\textemdash Contains the principal cast/crew for titles
+
+    \begin{itemize}
+        \item \texttt{tconst} (string)\textemdash alphanumeric unique identifier of the title
+        \item \texttt{ordering} (integer)\textemdash a number to uniquely identify rows for a given \texttt{titleId}
+        \item \texttt{nconst} (string)\textemdash alphanumeric unique identifier of the name/person
+        \item \texttt{category} (string)\textemdash the category of job that person was in
+        \item \texttt{job} (string)\textemdash the specific job title if applicable, else \texttt{\textbackslash N}
+        \item \texttt{characters} (string)\textemdash the name of the character played if applicable, else \texttt{\textbackslash N}
+    \end{itemize}
+
+    \textbf{title.ratings.tsv.gz}\textemdash Contains the IMDb rating and votes information for titles
+
+    \begin{itemize}
+        \item \texttt{tconst} (string)\textemdash alphanumeric unique identifier of the title
+        \item \texttt{averageRating}\textemdash weighted average of all the individual user ratings
+        \item \texttt{numVotes}\textemdash number of votes the title has received
+    \end{itemize}
+
+    \textbf{name.basics.tsv.gz}\textemdash Contains the following information for names:
+
+    \begin{itemize}
+        \item \texttt{nconst} (string)\textemdash alphanumeric unique identifier of the name/person
+        \item \texttt{primaryName} (string)\textemdash name by which the person is most often credited
+        \item \texttt{birthYear}\textemdash in YYYY format
+        \item \texttt{deathYear}\textemdash in YYYY format if applicable, else \texttt{\textbackslash N}
+        \item \texttt{primaryProfession} (array of strings)\textemdash the top-3 professions of the person
+        \item \texttt{knownForTitles} (array of tconsts)\textemdash titles the person is known for
+    \end{itemize}
+
+    \section{Other data sources} \label{sec:other_data}
+
+    Below are some other movie data sources that can be added at a later stage.
+
+    \begin{itemize}
+
+        \item \textbf{OMDb API} \\
+        The Open Movie Database \\
+        The OMDb API is a RESTful web service to obtain movie information, all content and images on the site are contributed and maintained by our users. \\
+        \url{https://www.omdbapi.com}
+
+        \item \textbf{MovieLens} \\
+        GroupLens Research has collected and made available rating data sets from the MovieLens web site (\url{http://movielens.org}).
+        The data sets were collected over various periods of time, depending on the size of the set.
+        Before using these data sets, please review their README files for the usage licenses and other details. \\
+        \url{https://grouplens.org/datasets/movielens/}
+
+        \item \textbf{Movie Review Data} \\
+        This page is a distribution site for movie-review data for use in sentiment-analysis experiments.
+        Available are collections of movie-review documents labeled with respect to their overall sentiment polarity (positive or negative) or subjective rating (e.g., "two and a half stars") and sentences labeled with respect to their subjectivity status (subjective or objective) or polarity. \\
+        \url{http://www.cs.cornell.edu/people/pabo/movie-review-data/}
+
+        \item \textbf{UCI ML repository Movie Data Set} \\
+        This data set contains a list of over 10000 films including many older, odd, and cult films.
+        There is information on actors, casts, directors, producers, studios, etc. \\
+        \url{https://archive.ics.uci.edu/ml/datasets/Movie}
+
+    \end{itemize}
+
+\end{document}
