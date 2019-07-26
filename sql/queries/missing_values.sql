@@ -34,6 +34,34 @@ SELECT SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) AS tconst_c,
        SUM(CASE WHEN genres IS NULL THEN 1 ELSE 0 END) AS genres_c
 FROM "title.basics";
 
+-- title.crew table
+SELECT SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) AS tconst_c,
+       SUM(CASE WHEN directors IS NULL THEN 1 ELSE 0 END) AS directors_c,
+       SUM(CASE WHEN writers IS NULL THEN 1 ELSE 0 END) AS writers_c
+FROM "title.crew";
+
+-- title.episode table
+SELECT SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) AS tconst_c,
+       SUM(CASE WHEN parenttconst IS NULL THEN 1 ELSE 0 END) AS parenttconst_c,
+       SUM(CASE WHEN seasonnumber IS NULL THEN 1 ELSE 0 END) AS seasonnumber_c,
+       SUM(CASE WHEN episodenumber IS NULL THEN 1 ELSE 0 END) AS episodenumber_c
+FROM "title.episode";
+
+-- title.principals table
+SELECT SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) AS tconst_c,
+       SUM(CASE WHEN ordering IS NULL THEN 1 ELSE 0 END) AS ordering_c,
+       SUM(CASE WHEN nconst IS NULL THEN 1 ELSE 0 END) AS nconst_c,
+       SUM(CASE WHEN category IS NULL THEN 1 ELSE 0 END) AS category_c,
+       SUM(CASE WHEN job IS NULL THEN 1 ELSE 0 END) AS job_c,
+       SUM(CASE WHEN characters IS NULL THEN 1 ELSE 0 END) AS characters_c
+FROM "title.principals";
+
+-- title.ratings table
+SELECT SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) AS tconst_c,
+       SUM(CASE WHEN averagerating IS NULL THEN 1 ELSE 0 END) AS averagerating_c,
+       SUM(CASE WHEN numvotes IS NULL THEN 1 ELSE 0 END) AS numvotes_c
+FROM "title.ratings";
+
 /* ************************************************************************ */
 /*       Queries to get percentages of non-null values by each column       */
 /* ************************************************************************ */
@@ -59,13 +87,41 @@ SELECT 100.0 * SUM(CASE WHEN titleid IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS ti
 FROM "title.akas";
 
 -- title.basics table
-SELECT 100.0 * SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS tconst_c,
-       100.0 * SUM(CASE WHEN titletype IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS titletype_c,
-       100.0 * SUM(CASE WHEN primarytitle IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS primarytitle_c,
-       100.0 * SUM(CASE WHEN originaltitle IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS originaltitle_c,
-       100.0 * SUM(CASE WHEN isadult IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS isadult_c,
-       100.0 * SUM(CASE WHEN startyear IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS startyear_c,
-       100.0 * SUM(CASE WHEN endyear IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS endyear_c,
-       100.0 * SUM(CASE WHEN runtimeminutes IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS runtimeminutes_c,
-       100.0 * SUM(CASE WHEN genres IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS genres_c
+SELECT 100.0 * SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS tconst_p,
+       100.0 * SUM(CASE WHEN titletype IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS titletype_p,
+       100.0 * SUM(CASE WHEN primarytitle IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS primarytitle_p,
+       100.0 * SUM(CASE WHEN originaltitle IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS originaltitle_p,
+       100.0 * SUM(CASE WHEN isadult IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS isadult_p,
+       100.0 * SUM(CASE WHEN startyear IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS startyear_p,
+       100.0 * SUM(CASE WHEN endyear IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS endyear_p,
+       100.0 * SUM(CASE WHEN runtimeminutes IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS runtimeminutes_p,
+       100.0 * SUM(CASE WHEN genres IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS genres_p
 FROM "title.basics";
+
+-- title.crew table
+SELECT 100.0 * SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS tconst_p,
+       100.0 * SUM(CASE WHEN directors IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS directors_p,
+       100.0 * SUM(CASE WHEN writers IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS writers_p
+FROM "title.crew";
+
+-- title.episode table
+SELECT 100.0 * SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS tconst_p,
+       100.0 * SUM(CASE WHEN parenttconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS parenttconst_p,
+       100.0 * SUM(CASE WHEN seasonnumber IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS seasonnumber_p,
+       100.0 * SUM(CASE WHEN episodenumber IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS episodenumber_p
+FROM "title.episode";
+
+-- title.principals table
+SELECT 100.0 * SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS tconst_p,
+       100.0 * SUM(CASE WHEN ordering IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS ordering_p,
+       100.0 * SUM(CASE WHEN nconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS nconst_p,
+       100.0 * SUM(CASE WHEN category IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS category_p,
+       100.0 * SUM(CASE WHEN job IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS job_p,
+       100.0 * SUM(CASE WHEN characters IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS characters_p
+FROM "title.principals";
+
+-- title.ratings table
+SELECT 100.0 * SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS tconst_p,
+       100.0 * SUM(CASE WHEN averagerating IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS averagerating_p,
+       100.0 * SUM(CASE WHEN numvotes IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS numvotes_p
+FROM "title.ratings";
