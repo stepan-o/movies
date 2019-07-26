@@ -219,3 +219,86 @@ SELECT
 FROM "title.basics"
 GROUP BY startyear
 ORDER BY startyear;
+
+/* ******************************* title.crew table ********************************* */
+-- count of titles by director and writer id - high number of titles (~6'000 for top)
+SELECT directors, COUNT(*) AS count_titles
+FROM "title.crew"
+GROUP BY directors
+ORDER BY count_titles DESC
+LIMIT 200;
+
+SELECT writers, COUNT(*) AS count_titles
+FROM "title.crew"
+GROUP BY writers
+ORDER BY count_titles DESC
+LIMIT 200;
+
+/* ******************************* title.episode table ********************************* */
+-- count of episode by parent tconst - high number of episodes for top parent tconsts (>11'000 for top)
+SELECT parenttconst, COUNT(*) AS count_epis
+FROM "title.episode"
+GROUP BY parenttconst
+ORDER BY count_epis DESC
+LIMIT 200;
+
+-- count of episodes by season number - up to 174 (191) seasons
+SELECT seasonnumber, COUNT(*) AS count_epis
+FROM "title.episode"
+GROUP BY seasonnumber
+ORDER BY seasonnumber;
+
+-- erratic values in season number - resemble year
+SELECT seasonnumber, COUNT(*) AS count_epis
+FROM "title.episode"
+WHERE seasonnumber > 200
+GROUP BY seasonnumber
+ORDER BY seasonnumber;
+
+/* ******************************* title.principals table ********************************* */
+-- count of principals by tconst - not more than 10 principals per title
+SELECT tconst, COUNT(*) AS count_principals
+FROM "title.principals"
+GROUP BY tconst
+ORDER BY count_principals DESC
+LIMIT 200;
+
+-- count by nconst
+SELECT nconst, COUNT(*) AS count_by_nconst
+FROM "title.principals"
+GROUP BY nconst
+ORDER BY count_by_nconst DESC
+LIMIT 200;
+
+-- count of unique nconsts by category
+SELECT category, COUNT(DISTINCT nconst)
+FROM "title.principals"
+GROUP BY category;
+
+-- count of principals by job
+SELECT job, COUNT(*) AS count_principals
+FROM "title.principals"
+GROUP BY job
+ORDER BY count_principals DESC
+LIMIT 200;
+
+-- count of unique nconsts by job
+SELECT job, COUNT(DISTINCT nconst) AS count_unq_nconst
+FROM "title.principals"
+GROUP BY job
+ORDER BY count_unq_nconst DESC
+LIMIT 200;
+
+/* ******************************* title.ratings table ********************************* */
+-- best and worst rated titles with > 3'000 votes
+SELECT *
+FROM "title.ratings"
+WHERE numvotes > 3000
+ORDER BY averagerating DESC
+LIMIT 1000;
+
+SELECT *
+FROM "title.ratings"
+WHERE numvotes > 3000
+ORDER BY averagerating
+LIMIT 1000;
