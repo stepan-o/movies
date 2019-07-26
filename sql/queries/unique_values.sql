@@ -33,3 +33,31 @@ SELECT COUNT(DISTINCT tconst) AS tconst_c,
        COUNT(DISTINCT runtimeminutes) AS runtimeminutes_c,
        COUNT(DISTINCT genres) AS genres_c
 FROM "title.basics";
+
+-- title.crew table
+SELECT COUNT(DISTINCT tconst) AS tconst_c,
+       COUNT(DISTINCT directors) AS directors_c,
+       COUNT(DISTINCT writers) AS writers_c
+FROM "title.crew";
+
+-- title.episode table
+SELECT COUNT(DISTINCT tconst) AS tconst_c,
+       COUNT(DISTINCT parenttconst) AS parenttconst_c,
+       COUNT(DISTINCT seasonnumber) AS seasonnumber_c,
+       COUNT(DISTINCT episodenumber) AS episodenumber_c
+FROM "title.episode";
+
+-- title.principals table
+SELECT COUNT(DISTINCT tconst) AS tconst_c,
+       COUNT(DISTINCT ordering) AS ordering_c,
+       COUNT(DISTINCT nconst) AS nconst_c,
+       COUNT(DISTINCT category) AS category_c,
+       COUNT(DISTINCT job) AS job_c,
+       COUNT(DISTINCT characters) AS characters_c
+FROM "title.principals";
+
+-- title.ratings table
+SELECT
+    COUNT(*) AS row_count,
+    COUNT(DISTINCT tconst) AS unq_tconst_count
+FROM "title.ratings";
