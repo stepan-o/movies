@@ -120,10 +120,82 @@
         \label{fig:dtypes}
     \end{figure}
 
+    \subsubsection{Data types} \label{subsubsec:dtypes}
+
+    Working with data types can be straightforward in a database management system such as PostgreSQL .
+    As said before, data types are attribute constraints and are therefore implemented for a single column of a table.
+    They define the so-called \textit{domain of values} in a column, that means, what form these values can take \textemdash and what not.
+    Therefore, they also define what operations are possible with the values in the column.
+    Through this, consistent storage is enforced, so a street number will always be an actual number, and a postal code will always have exactly 6 characters, according to the defined conventions.
+    This greatly helps with data quality.
+
+    To sum up, data types in a database management system are:
+
+    \begin{itemize}
+        \item Enforced on columns (\textit{i.e.,} attributes)
+        \item Define the so-called \textit{domain} of a column
+        \item Define which operations are possible
+        \item Enforce consistent storage of values
+    \end{itemize}
+
+    Most common data types in PostgreSQL include:
+
+    \begin{itemize}
+        \item \texttt{text}: character string of any length
+        \item \texttt{varchar [ (n) ]}: a maximum of \texttt{n} characters
+        \item \texttt{char [ (n) ]}: a fixed-length string of \texttt{n} characters
+        \item \texttt{boolean}: can only take three states, \textit{e.g.,} \texttt{TRUE}, \texttt{FALSE}, and \texttt{NULL} (unknown)
+        \item \texttt{date}, \texttt{time}, and \texttt{timestamp}: various formats for date and time calcualtions
+        \item \texttt{numeric}: arbitrary precision numbers, \textit{e.g.,} 3.1457
+        \item \texttt{integer}: whole numbers in the range of -2'147'483'648 and +2'147'483'647
+        \item \texttt{bigint}: whole numbers in a larger range
+    \end{itemize}
+
+    These data types are specific to PostgreSQL, but appear in many other database management systems as well, and they mostly conform to the SQL standard.
+
+    \subsubsection{The \texttt{not-null} constraint} \label{subsubsec:not_null}
+
+    Another type of attribute constraints are the \textbf{not-null} constraints.
+    The not-null constraint disallows any \texttt{NULL} values on a given column.
+    This must hold true for the existing state of the database, as well as for the future state.
+    Therefore, we can only specify a not-null constraint on a column that doesn't hold any \texttt{NULL} values yet.
+    And, it won't be possible to insert any null values in the future.
+
+    There is no clear definition of what do \texttt{NULL} values actually mean.
+    \texttt{NULL} can mean a couple of things, for example, that the value is unknown, or does not exist at all.
+    It can also be possible that the value does not apply to the column.
+    One important takeaway is that two \texttt{NULL} values must not have the same meaning.
+    This also means that comparing \texttt{NULL} with \texttt{NULL} always results in a \texttt{FALSE} value.
+
+    To sum up, the not-null constraints:
+
+    \begin{itemize}
+        \item Disallow \texttt{NULL} values in a certain column.
+        \item Must hold true for the current state
+        \item Must hold true for any future state
+        \item \texttt{NULL} can mean different things: does not exist, does not apply, missing, \textit{etc.}
+        \item Therefore, \texttt{NULL~!=~NULL}
+    \end{itemize}
+
+    \subsubsection{The \texttt{unique} constraint} \label{subsubsec:unique}
+
+    The unique constraint on a column makes sure that there are no duplicates in a column.
+    So, any given value in a column can only exist once.
+    This makes sense in cases where storing values more than once leads to unnecessary redundancy.
+    However, it does not make sense in cases where it is expected that values might repeat.
+    Just as with the not-null constraint, we can add a unique constraint if the column does not have any duplicates before we apply it.
+    Making sure that a column contains only unique values is a prerequisite for turning them into \textit{primary keys}
+
+    To sum up, unique constraint:
+
+    \begin{itemize}
+        \item Disallows duplicate values in a column
+        \item Must hold true for the current state
+        \item Must hold true for any future state
+        \item Is a prerequisite for turning the column into a primary key
+    \end{itemize}
 
     \section{\texttt{information\_schema} database} \label{sec:info_schema}
-
-    SQL, or \textbf{Structured Query Language}, can be used for querying, as well as building and maintaining databases.
 
     \texttt{information\_schema} database is available by default in PostgreSQL and presents a \textit{meta database} that holds information about a relational database in PostgreSQL .
     \texttt{information\_schema} is not PostgreSQL specific, and is also available in other database management systems, such as MySQL or SQL Server.
@@ -131,6 +203,7 @@
 
     \subsection{Querying \texttt{information\_schema} using \texttt{SELECT * FROM} syntax} \label{subsec:info_schema_q}
 
+    SQL, or \textbf{Structured Query Language}, can be used for querying, as well as building and maintaining databases.
     \texttt{information\_schema} has multiple tables you can query with the known \texttt{SELECT * FROM} syntax:
 
     \begin{itemize}
