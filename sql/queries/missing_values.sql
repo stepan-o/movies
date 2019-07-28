@@ -9,7 +9,7 @@ SELECT SUM(CASE WHEN nconst IS NULL THEN 1 ELSE 0 END) AS nconst_c,
        SUM(CASE WHEN deathyear IS NULL THEN 1 ELSE 0 END) AS deathyear_c,
        SUM(CASE WHEN primaryprofession IS NULL THEN 1 ELSE 0 END) AS primaryprofession_c,
        SUM(CASE WHEN knownfortitles IS NULL THEN 1 ELSE 0 END) AS knownfortitles_c
-FROM "name.basics";
+FROM name_basics;
 
 -- title.akas table
 SELECT SUM(CASE WHEN titleid IS NULL THEN 1 ELSE 0 END) AS titleid_null_c,
@@ -32,7 +32,7 @@ SELECT SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) AS tconst_c,
        SUM(CASE WHEN endyear IS NULL THEN 1 ELSE 0 END) AS endyear_c,
        SUM(CASE WHEN runtimeminutes IS NULL THEN 1 ELSE 0 END) AS runtimeminutes_c,
        SUM(CASE WHEN genres IS NULL THEN 1 ELSE 0 END) AS genres_c
-FROM "title.basics";
+FROM title_basics;
 
 -- title.crew table
 SELECT SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) AS tconst_c,
@@ -73,7 +73,7 @@ SELECT 100.0 * SUM(CASE WHEN nconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS nco
        100.0 * SUM(CASE WHEN deathyear IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS deathyear_p,
        100.0 * SUM(CASE WHEN primaryprofession IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS primaryprofession_p,
        100.0 * SUM(CASE WHEN knownfortitles IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS knownfortitles_p
-FROM "name.basics";
+FROM name_basics;
 
 -- title.akas table
 SELECT 100.0 * SUM(CASE WHEN titleid IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS titleid_null_p,
@@ -96,7 +96,7 @@ SELECT 100.0 * SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS tco
        100.0 * SUM(CASE WHEN endyear IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS endyear_p,
        100.0 * SUM(CASE WHEN runtimeminutes IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS runtimeminutes_p,
        100.0 * SUM(CASE WHEN genres IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS genres_p
-FROM "title.basics";
+FROM title_basics;
 
 -- title.crew table
 SELECT 100.0 * SUM(CASE WHEN tconst IS NULL THEN 1 ELSE 0 END) / COUNT(*) AS tconst_p,
