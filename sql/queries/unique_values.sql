@@ -10,7 +10,7 @@ SELECT COUNT(*) AS num_rows,
        COUNT(DISTINCT deathyear) AS deathYear_unq,
        COUNT(DISTINCT primaryprofession) AS primaryprofession_unq,
        COUNT(DISTINCT knownfortitles) AS knownfortitles_unq
-FROM "name.basics";
+FROM name_basics;
 
 -- title.akas table
 SELECT COUNT(*) AS num_rows,
@@ -36,7 +36,7 @@ SELECT COUNT(*) AS num_rows,
        COUNT(DISTINCT endyear) AS endyear_unq,
        COUNT(DISTINCT runtimeminutes) AS runtimeminutes_unq,
        COUNT(DISTINCT genres) AS genres_unq
-FROM "title.basics";
+FROM title_basics;
 
 -- title.crew table
 SELECT COUNT(*) AS num_rows,
