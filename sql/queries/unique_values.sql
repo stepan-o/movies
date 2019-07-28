@@ -3,61 +3,69 @@
 /* ************************************************************************ */
 
 -- name.basics table
-SELECT COUNT(DISTINCT nconst) AS nconst_c,
-       COUNT(DISTINCT primaryname) AS primaryName_c,
-       COUNT(DISTINCT birthyear) AS birthYear_c,
-       COUNT(DISTINCT deathyear) AS deathYear_c,
-       COUNT(DISTINCT primaryprofession) AS primaryprofession_c,
-       COUNT(DISTINCT knownfortitles) AS knownfortitles_c
+SELECT COUNT(*) AS num_rows,
+       COUNT(DISTINCT nconst) AS nconst_unq, -- candidate key
+       COUNT(DISTINCT primaryname) AS primaryName_unq,
+       COUNT(DISTINCT birthyear) AS birthYear_unq,
+       COUNT(DISTINCT deathyear) AS deathYear_unq,
+       COUNT(DISTINCT primaryprofession) AS primaryprofession_unq,
+       COUNT(DISTINCT knownfortitles) AS knownfortitles_unq
 FROM "name.basics";
 
 -- title.akas table
-SELECT COUNT(DISTINCT titleid) AS titleid_c,
-       COUNT(DISTINCT ordering) AS ordering_c,
-       COUNT(DISTINCT title) AS title_c,
-       COUNT(DISTINCT region) AS region_c,
-       COUNT(DISTINCT language) AS language_c,
-       COUNT(DISTINCT types) AS types_c,
-       COUNT(DISTINCT attributes) AS attributes_c,
-       COUNT(DISTINCT isoriginaltitle) AS isoriginaltitle_c
+SELECT COUNT(*) AS num_rows,
+       COUNT(DISTINCT(titleid, ordering)) AS titleid_ordering_unq, -- candidate key
+       COUNT(DISTINCT titleid) AS titleid_unq,
+       COUNT(DISTINCT ordering) AS ordering_unq,
+       COUNT(DISTINCT title) AS title_unq,
+       COUNT(DISTINCT region) AS region_unq,
+       COUNT(DISTINCT language) AS language_unq,
+       COUNT(DISTINCT types) AS types_unq,
+       COUNT(DISTINCT attributes) AS attributes_unq,
+       COUNT(DISTINCT isoriginaltitle) AS isoriginaltitle_unq
 FROM "title.akas";
 
 -- title.basics table
-SELECT COUNT(DISTINCT tconst) AS tconst_c,
-       COUNT(DISTINCT titletype) AS titletype_c,
-       COUNT(DISTINCT primarytitle) AS primarytitle_c,
-       COUNT(DISTINCT originaltitle) AS originaltitle_c,
-       COUNT(DISTINCT isadult) AS isadult_c,
-       COUNT(DISTINCT startyear) AS startyear_c,
-       COUNT(DISTINCT endyear) AS endyear_c,
-       COUNT(DISTINCT runtimeminutes) AS runtimeminutes_c,
-       COUNT(DISTINCT genres) AS genres_c
+SELECT COUNT(*) AS num_rows,
+       COUNT(DISTINCT tconst) AS tconst_unq, -- candidate key
+       COUNT(DISTINCT titletype) AS titletype_unq,
+       COUNT(DISTINCT primarytitle) AS primarytitle_unq,
+       COUNT(DISTINCT originaltitle) AS originaltitle_unq,
+       COUNT(DISTINCT isadult) AS isadult_unq,
+       COUNT(DISTINCT startyear) AS startyear_unq,
+       COUNT(DISTINCT endyear) AS endyear_unq,
+       COUNT(DISTINCT runtimeminutes) AS runtimeminutes_unq,
+       COUNT(DISTINCT genres) AS genres_unq
 FROM "title.basics";
 
 -- title.crew table
-SELECT COUNT(DISTINCT tconst) AS tconst_c,
-       COUNT(DISTINCT directors) AS directors_c,
-       COUNT(DISTINCT writers) AS writers_c
+SELECT COUNT(*) AS num_rows,
+       COUNT(DISTINCT tconst) AS tconst_unq, -- candidate key
+       COUNT(DISTINCT directors) AS directors_unq,
+       COUNT(DISTINCT writers) AS writers_unq
 FROM "title.crew";
 
 -- title.episode table
-SELECT COUNT(DISTINCT tconst) AS tconst_c,
-       COUNT(DISTINCT parenttconst) AS parenttconst_c,
-       COUNT(DISTINCT seasonnumber) AS seasonnumber_c,
-       COUNT(DISTINCT episodenumber) AS episodenumber_c
+SELECT COUNT(*) AS num_rows,
+       COUNT(DISTINCT tconst) AS tconst_unq, -- candidate key
+       COUNT(DISTINCT parenttconst) AS parenttconst_unq,
+       COUNT(DISTINCT seasonnumber) AS seasonnumber_unq,
+       COUNT(DISTINCT episodenumber) AS episodenumber_unq
 FROM "title.episode";
 
 -- title.principals table
-SELECT COUNT(DISTINCT tconst) AS tconst_c,
-       COUNT(DISTINCT ordering) AS ordering_c,
-       COUNT(DISTINCT nconst) AS nconst_c,
-       COUNT(DISTINCT category) AS category_c,
-       COUNT(DISTINCT job) AS job_c,
-       COUNT(DISTINCT characters) AS characters_c
+SELECT COUNT(*) AS num_rows,
+       COUNT(DISTINCT(tconst, ordering)) AS tconst_ordering_unq, -- candidate key
+       COUNT(DISTINCT tconst) AS tconst_unq,
+       COUNT(DISTINCT ordering) AS ordering_unq,
+       COUNT(DISTINCT nconst) AS nconst_unq,
+       COUNT(DISTINCT category) AS category_unq,
+       COUNT(DISTINCT job) AS job_unq,
+       COUNT(DISTINCT characters) AS characters_unq
 FROM "title.principals";
 
 -- title.ratings table
 SELECT
-    COUNT(*) AS row_count,
+    COUNT(*) AS row_count, -- candidate key
     COUNT(DISTINCT tconst) AS unq_tconst_count
 FROM "title.ratings";
