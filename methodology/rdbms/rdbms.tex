@@ -232,6 +232,10 @@
     Lastly, primary key constraints are time invariant, meaning that they must hold for the current data in the table \textemdash but also for any future data a table might hold.
     It is therefore wise to choose columns where values will always be unique and not null.
 
+    A table can have one and only one primary key.
+    It is a good practice to add a primary key to every table.
+    When we add a primary key to a table, PostgreSQL creates a unique B-tree index on the column or a group of columns used to define the primary key.\cite{ThePostgreSQLGlobalDevelopmentGroup2019a}
+
     To sum up the information about primary keys, in a database:
 
     \begin{itemize}
@@ -240,6 +244,7 @@
         \item Unique and not-null constraints both apply
         \item Primary keys are time-invariant and therefore must be chosen wisely
         \item Ideally, primary keys consist from as few columns as possible
+        \item It is a good practice to add a primary key to every table.
     \end{itemize}
 
     \subsubsection{Surrogate keys} \label{subsubsec:surrogate_keys}
