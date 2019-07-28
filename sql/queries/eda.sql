@@ -1,6 +1,7 @@
-/* ************************************************************************ */
-/*                 Queries for Exploratory Data Analysis (EDA)              */
-/* ************************************************************************ */
+/* ******************************************************************************** */
+/*                    Queries for Exploratory Data Analysis (EDA)                   */
+/*                          IMDb data: individual tables                            */
+/* ******************************************************************************** */
 
 -- Count of records by each primaryProfession from name.basics table
 SELECT
@@ -41,7 +42,7 @@ SELECT
     SUM(CASE WHEN primaryprofession LIKE '%stunts%' THEN 1 ELSE 0 END) AS num_stunts,
     SUM(CASE WHEN primaryprofession LIKE '%animation_department%' THEN 1 ELSE 0 END) AS num_animators,
     SUM(CASE WHEN primaryprofession LIKE '%electrical_department%' THEN 1 ELSE 0 END) AS num_electrical_department
-FROM "name.basics";
+FROM name_basics;
 
 -- Count of regional titles by region from title.akas.table
 SELECT region, COUNT(*)
@@ -69,18 +70,18 @@ LIMIT 100;
 
 -- count of titles by title type from title.basics table
 SELECT titletype, COUNT(*)
-FROM "title.basics"
+FROM title_basics
 GROUP BY titletype;
 
 -- primary and original titles for TV-series episodes in title.basics table repeat a lot (e.g., Episode #1.1)
 SELECT primarytitle, COUNT(*) AS title_count
-FROM "title.basics"
+FROM title_basics
 GROUP BY primarytitle
 ORDER BY title_count DESC
 LIMIT 200;
 
 SELECT originaltitle, COUNT(*) AS title_count
-FROM "title.basics"
+FROM title_basics
 GROUP BY originaltitle
 ORDER BY title_count DESC
 LIMIT 200;
@@ -88,14 +89,14 @@ LIMIT 200;
 -- a lot of movies and tv episodes in title.basics table have the same generic names (e.g., 'Home', 'Alone', 'Broken', etc.)
 -- top 200 primary and original titles by count of records in title.basics table
 SELECT primarytitle, COUNT(*) AS title_count
-FROM "title.basics"
+FROM title_basics
 WHERE titletype <> 'tvEpisode' -- to avoid duplicate titles such as 'Episode #1.1'
 GROUP BY primarytitle
 ORDER BY title_count DESC
 LIMIT 200;
 
 SELECT originaltitle, COUNT(*) AS title_count
-FROM "title.basics"
+FROM title_basics
 WHERE titletype <> 'tvEpisode'
 GROUP BY originaltitle
 ORDER BY title_count DESC
@@ -103,42 +104,42 @@ LIMIT 200;
 
 -- records in title.basics with primary title 'Home'
 SELECT *
-FROM "title.basics"
+FROM title_basics
 WHERE primarytitle='Home'
 ORDER BY startyear;
 
 -- records in title.basics with primary title 'Alone'
 SELECT *
-FROM "title.basics"
+FROM title_basics
 WHERE primarytitle='Alone'
 ORDER BY startyear;
 
 -- records in title.basics with primary title 'Broken'
 SELECT *
-FROM "title.basics"
+FROM title_basics
 WHERE primarytitle='Broken'
 ORDER BY startyear;
 
 -- count of records by start year in title.basics table
 SELECT startyear, COUNT(*)
-FROM "title.basics"
+FROM title_basics
 GROUP BY startyear
 ORDER BY startyear;
 
 -- 100 years - A Movie You Will Never See in title.basics table
 SELECT *
-FROM "title.basics"
+FROM title_basics
 WHERE startyear=2115;
 
 -- forward thinking - 4 more Avatar movies scheduled from 2021 to 2027 in title.basics table
 SELECT *
-FROM "title.basics"
+FROM title_basics
 WHERE primarytitle LIKE 'Avatar%' AND startyear > 2020
 ORDER BY startyear;
 
 -- crazy long movies in title.basics - Logistics (2012) is 5-weeks long!
 SELECT *
-FROM "title.basics"
+FROM title_basics
 WHERE runtimeminutes > 1000 AND titletype = 'movie'
 ORDER BY runtimeminutes;
 
@@ -150,7 +151,7 @@ SELECT
     MIN(runtimeminutes) AS min_runtime,
     AVG(runtimeminutes) AS avg_runtime,
     MAX(runtimeminutes) AS max_runtime
-FROM "title.basics"
+FROM title_basics
 WHERE titletype = 'movie'
 GROUP BY startyear
 ORDER BY startyear;
@@ -184,7 +185,7 @@ SELECT
     SUM(CASE WHEN genres LIKE '%Western%' THEN 1 ELSE 0 END) AS num_westerns,
     SUM(CASE WHEN genres LIKE '%Game-Show%' THEN 1 ELSE 0 END) AS num_game_shows,
     SUM(CASE WHEN genres LIKE '%Adventure%' THEN 1 ELSE 0 END) AS num_adventures
-FROM "title.basics";
+FROM title_basics;
 
 -- num records by genre grouped by start year (TIME SERIES) from title.basics table
 SELECT
@@ -216,7 +217,7 @@ SELECT
     SUM(CASE WHEN genres LIKE '%Western%' THEN 1 ELSE 0 END) AS num_westerns,
     SUM(CASE WHEN genres LIKE '%Game-Show%' THEN 1 ELSE 0 END) AS num_game_shows,
     SUM(CASE WHEN genres LIKE '%Adventure%' THEN 1 ELSE 0 END) AS num_adventures
-FROM "title.basics"
+FROM title_basics
 GROUP BY startyear
 ORDER BY startyear;
 
