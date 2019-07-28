@@ -20,6 +20,26 @@ WHERE tr.averagerating > 8.5 AND
         tb.titletype = 'movie'
 ORDER BY tb.startyear;
 
+
+----------------------------- all Johnny Depp movies
+SELECT
+    nb.primaryname AS name,
+    tb.startyear AS startYear,
+    tb.primarytitle AS title,
+    tb.titletype AS titleType,
+    tr.averagerating AS averageRating,
+    tr.numvotes AS numVotes,
+    tp.category AS job,
+    tp.characters AS character
+FROM title_principals_ri AS tp
+         JOIN name_basics AS nb ON tp.nconst = nb.nconst
+         JOIN title_basics AS tb on tp.tconst = tb.tconst
+         JOIN title_ratings_ri AS tr ON tb.tconst = tr.tconst
+WHERE
+        nb.primaryname LIKE '%Johnny Depp%' AND
+        tb.titletype = 'movie'
+ORDER BY tb.startyear;
+
 ----------------------------- movies with highest average rating by each year
 SELECT
     x2.startyear AS startYear,
