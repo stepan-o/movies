@@ -1,2 +1,2 @@
-tconst_c,titletype_c,primarytitle_c,originaltitle_c,isadult_c,startyear_c,endyear_c,runtimeminutes_c,genres_c
-6023418,10,3059415,3074552,2,147,92,814,2220
+num_rows,tconst_unq,titletype_unq,primarytitle_unq,originaltitle_unq,isadult_unq,startyear_unq,endyear_unq,runtimeminutes_unq,genres_unq
+6023418,6023418,10,3059415,3074552,2,147,92,814,2220
