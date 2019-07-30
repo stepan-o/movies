@@ -128,3 +128,8 @@ comment on table title_ratings_ri is 'Ratings for movie titles';
 
 alter table title_ratings_ri
     owner to movies;
+
+
+/* ----------------- add a composite primary key ------------------ */
+ALTER TABLE title_principals_ri
+    ADD PRIMARY KEY (tconst, ordering);
